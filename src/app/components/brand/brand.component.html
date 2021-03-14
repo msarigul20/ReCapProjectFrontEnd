@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center">
+  <div
+    *ngIf="dataLoaded == false"
+    class="spinner-border text-success"
+    role="status"
+  >
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+  <table *ngIf="dataLoaded != false" class="table table-success table-hover ">
+    <thead class="table-dark">
+      <tr>
+        <th class="text-center">Brand Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let brand of brands">
+        <td class="text-center">{{ brand.brandName }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

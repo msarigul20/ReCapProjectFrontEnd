@@ -1,0 +1,25 @@
+<div
+  *ngIf="dataLoaded == false"
+  class="spinner-border text-danger"
+  role="status"
+>
+  <span class="visually-hidden">Loading...</span>
+</div>
+<h5 class="text-center border border-5 border-dark border-dark border-bottom-0 mb-0  rounded-top">List of Customer</h5>
+
+<table *ngIf="dataLoaded != false" class="table table-danger table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th class="text-center">Id</th>
+      <th class="text-center">User Id</th>
+      <th class="text-center">Company Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers">
+      <td class="text-center">{{ customer.id }}</td>
+      <td class="text-center">{{ customer.userId }}</td>
+      <td class="text-center">{{ customer.companyName }}</td>
+    </tr>
+  </tbody>
+</table>
