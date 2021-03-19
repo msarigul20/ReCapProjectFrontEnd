@@ -11,13 +11,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let car of cars">
+    <tr (click)="setCurrentCar(car)" *ngFor="let car of cars"  routerLink="/cars/details/{{car.carId}}" >
       <td class="text-center">{{car.carId}}</td>
       <td class="text-center">{{car.brandName}}</td>
       <td class="text-center">{{car.colorName}}</td>
       <td class="text-center">{{car.dailyPrice}}</td>
       <td class="text-center">{{car.modelYear}}</td>
       <td class="text-center">{{car.descriptions}}</td>
+      
 
     </tr>
   </tbody>

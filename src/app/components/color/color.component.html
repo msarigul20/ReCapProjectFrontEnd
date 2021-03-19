@@ -1,23 +1,21 @@
 <div class="d-flex justify-content-center">
-    <div
-      *ngIf="dataLoaded == false"
-      class="spinner-border text-secondary"
-      role="status"
-    >
-      <span class="visually-hidden">Loading..</span>
-    </div>
-  
-    <table *ngIf="dataLoaded != false" class="table table-secondary table-hover ">
-      <thead class="table-dark">
-        <tr>
-          <th class="text-center">Color Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let color of colors">
-          <td class="text-center">{{ color.colorName }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div
+    *ngIf="dataLoaded == false"
+    class="spinner-border text-secondary"
+    role="status"
+  >
+    <span class="visually-hidden">Loading..</span>
   </div>
-  
+  <ul class="list-group my-2">
+    <li
+      (click)="setCurrentColor(color)"
+      *ngFor="let color of colors"
+      [class]="getCurrentColorClass(color)"
+      routerLink="/cars/color/{{color.colorId}}"
+    >
+      {{ color.colorName }}
+    </li>
+  </ul>
+</div>
+
+<h4 *ngIf="currentColor">{{currentColor.colorName}}</h4>
