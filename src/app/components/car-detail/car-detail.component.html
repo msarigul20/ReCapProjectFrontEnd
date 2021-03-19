@@ -1,69 +1,72 @@
 <div class="row my-5">
-    <div class="col-md-8">
-      <div
-          id="carouselExampleDark"
-          class="carousel carousel-fade slide carousel-dark"
-          data-bs-ride="carousel"
+  <div class="col-md-8">
+    <div
+      id="carouselExampleDark"
+      class="carousel carousel-fade slide carousel-dark"
+      data-bs-ride="carousel"
+    >
+      <ol class="carousel-indicators">
+        <li
+          data-bs-target="#carouselExampleDark"
+          *ngFor="let li of carImages; let i = index"
+          [attr.data-bs-slide-to]="i"
+          [class]="i == 0 ? 'active' : ''"
+        ></li>
+      </ol>
+
+      <div class="carousel-inner">
+        <div
+          *ngFor="let carImage of carImages"
+          [class]="getCurrentImageClass(carImage)"
+          data-bs-interval="3000"
         >
-          <ol class="carousel-indicators">
-            <li
-              data-bs-target="#carouselExampleDark"
-              *ngFor="let li of carImages; let i = index"
-              [attr.data-bs-slide-to]="i"
-              [class]="i == 0 ? 'active' : ''"
-            ></li>
-          </ol>
-  
-          <div class="carousel-inner">
-            <div
-              *ngFor="let carImage of carImages"
-              [class]="getCurrentImageClass(carImage)"
-              data-bs-interval="3000"
-            >
-              
-                <img [src]="baseUrl + carImage.imagePath" [class]="checkDefaultSize()" />
-              
-            </div>
-          </div>
-  
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleDark"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-  
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleDark"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+          <img
+            [src]="baseUrl + carImage.imagePath"
+            [class]="getImageClass()"
+          />
         </div>
+      </div>
+
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5  class="card-title"><strong> {{currentCar.brandName}}</strong></h5>
-          <p class="card-text">{{ currentCar.descriptions }}</p>   
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Marka : {{ currentCar.brandName }}</li>
-            <li class="list-group-item">Model : {{ currentCar.modelYear }}</li>
-            <li class="list-group-item">Renk : {{ currentCar.colorName }}</li>
-            <li class="list-group-item">
-              Günlük Ücret : {{ currentCar.dailyPrice }} TL
-            </li>
-          </ul>
-          <div class="card-body">
-            <button type="button" class="btn btn-primary">Kirala</button>
-          </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          <strong> {{ currentCar.brandName }}</strong>
+        </h5>
+        <p class="card-text">{{ currentCar.descriptions }}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Marka : {{ currentCar.brandName }}</li>
+        <li class="list-group-item">Model : {{ currentCar.modelYear }}</li>
+        <li class="list-group-item">Renk : {{ currentCar.colorName }}</li>
+        <li class="list-group-item">
+          Günlük Ücret : {{ currentCar.dailyPrice }} TL
+        </li>
+      </ul>
+      <div class="card-body">
+        <button type="button" class="btn btn-primary">Kirala</button>
       </div>
     </div>
   </div>
+</div>

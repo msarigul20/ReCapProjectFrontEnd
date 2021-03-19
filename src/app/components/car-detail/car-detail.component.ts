@@ -49,7 +49,7 @@ export class CarDetailComponent implements OnInit {
     })
   }
 
-  checkDefaultSize(){
+  getImageClass(){
     if (this.carImages[0].id==0) {
       console.log("test" + this.carImages[0].id)
 
