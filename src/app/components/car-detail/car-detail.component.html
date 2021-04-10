@@ -65,7 +65,17 @@
         </li>
       </ul>
       <div class="card-body">
-        <button type="button" class="btn btn-primary">Kirala</button>
+        <div *ngIf="isCarRentable; then rentButton else denyButton"></div>
+        
+        <!-- <ng-template #rentButton><button type="button" class="btn btn-success" >Kirala</button></ng-template> -->
+
+        <ng-template #rentButton> <app-rental-add [car]="currentCar"></app-rental-add></ng-template>
+        
+        <ng-template #denyButton><button type="button" class="btn btn-danger disabled" >Already Rented</button></ng-template>
+
+        
+        
+        
       </div>
     </div>
   </div>

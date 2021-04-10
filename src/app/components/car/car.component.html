@@ -1,4 +1,31 @@
-<h5 class="text-center border border-5 border-dark border-dark border-bottom-0 mb-0  rounded-top">List of Cars</h5>
+<div class="mb-3">
+  <label for="filterText" class="form-label">Search Car with Brand Name </label>
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Car Search With Brand Name"
+  />
+</div>
+<div class="mb-3">
+  <label for="filterTextForColor" class="form-label"
+    >Search Car with Color Name
+  </label>
+  <input
+    type="text"
+    [(ngModel)]="filterTextForColor"
+    class="form-control"
+    id="filterTextForColor"
+    placeholder="Car Search With Color Name"
+  />
+</div>
+
+<h5
+  class="text-center border border-5 border-dark border-dark border-bottom-0 mb-0 rounded-top"
+>
+  List of Cars
+</h5>
 <table class="table table-info">
   <thead class="table-dark">
     <tr>
@@ -6,20 +33,30 @@
       <th class="text-center">Brand Name</th>
       <th class="text-center">Color Name</th>
       <th class="text-center">Daily Price</th>
+      <th class="text-center">Weekly Price</th>
       <th class="text-center">Model Year</th>
       <th class="text-center">Desriptions</th>
     </tr>
   </thead>
   <tbody>
-    <tr (click)="setCurrentCar(car)" *ngFor="let car of cars"  routerLink="/cars/details/{{car.carId}}" >
-      <td class="text-center">{{car.carId}}</td>
-      <td class="text-center">{{car.brandName}}</td>
-      <td class="text-center">{{car.colorName}}</td>
-      <td class="text-center">{{car.dailyPrice}}</td>
-      <td class="text-center">{{car.modelYear}}</td>
-      <td class="text-center">{{car.descriptions}}</td>
-      
-
+    <tr
+      (click)="setCurrentCar(car)"
+      *ngFor="
+        let car of cars
+          | carFilterPipe: filterText
+          | carFilterPipeColor: filterTextForColor
+      "
+      routerLink="/cars/details/{{ car.carId }}"
+    >
+      <td class="text-center">{{ car.carId }}</td>
+      <td class="text-center">{{ car.brandName }}</td>
+      <td class="text-center">{{ car.colorName }}</td>
+      <td class="text-center">{{ car.dailyPrice | currency }}</td>
+      <td class="text-center">
+        {{ car.dailyPrice | weekPriceCalculated: 10 | currency }}
+      </td>
+      <td class="text-center">{{ car.modelYear }}</td>
+      <td class="text-center">{{ car.descriptions }}</td>
     </tr>
   </tbody>
 </table>

@@ -12,10 +12,14 @@ export class BrandComponent implements OnInit {
   brands: Brand[] = [];
   dataLoaded = false;
   currentBrand:Brand;
+  cleanBrand:Brand = {brandId:0, brandName:"All"}
+  filterText = "";
+
   constructor(private branService:BrandService) {}
 
   ngOnInit(): void {
     this.getBrands();
+    this.clearCurrentBrand();
   }
 
   getBrands() {
@@ -36,5 +40,17 @@ export class BrandComponent implements OnInit {
       return "list-group-item text-center px-4" ;
     }
   }
+
+  clearCurrentBrand(){
+    this.currentBrand = this.cleanBrand;
+  }
+  getAllBrandClass(){
+    if(this.currentBrand.brandId==0){
+      return "list-group-item active text-center px-4"
+    }else{
+      return "list-group-item text-center px-4"
+    }
+  }
+
 
 }

@@ -4,6 +4,7 @@ import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/car-image';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
+import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-car-detail',
@@ -15,19 +16,30 @@ export class CarDetailComponent implements OnInit {
   baseUrl="https://localhost:44339/"
   carImages:CarImage[];
   currentCar:Car;
+  isCarRentable:boolean;
+
   constructor(private carService:CarService,
     private carImageService:CarImageService,
-    private activatedRoute:ActivatedRoute) { }
+    private activatedRoute:ActivatedRoute,
+    private rentalService:RentalService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
-        this.getCarImagesByCarId(params['carId']);
         this.setCurrentCar(params['carId']);
+        this.getCarImagesByCarId(params['carId']);
+        this.checkCarRentable(params['carId']);
+        
       }
     });
   }
 
+  checkCarRentable(carId:number){
+    this.rentalService.getRentalCarControl(carId).subscribe((response) => {
+      this.isCarRentable = response.success;     
+    })
+  }
+  
   getCarImagesByCarId(id: number) {
     this.carImageService.getImagesByCarId(id).subscribe((response) => {
       this.carImages = response.data;
@@ -46,17 +58,15 @@ export class CarDetailComponent implements OnInit {
   setCurrentCar(carId:number){
     this.carService.getCarDetailsByCarId(carId).subscribe((response) => {
       this.currentCar = response.data[0];
+      console.log(this.currentCar)
     })
   }
 
   getImageClass(){
     if (this.carImages[0].id==0) {
-      console.log("test" + this.carImages[0].id)
-
       return "d-block mx-auto p-5"
 
     }
-    console.log("test" + this.carImages[0].id)
     return "d-block w-100"
   }
   

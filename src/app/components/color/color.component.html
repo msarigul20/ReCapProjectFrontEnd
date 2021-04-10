@@ -1,15 +1,30 @@
-<div class="d-flex justify-content-center">
-  <div
-    *ngIf="dataLoaded == false"
-    class="spinner-border text-secondary"
-    role="status"
-  >
-    <span class="visually-hidden">Loading..</span>
+<!-- <div class="container">
+  <div class="row float-start">
+    <div class="col-md-10">
+    <select class="form-select"   [(ngModel)]="selectText" >
+      <option  >Select Color</option>
+      <option [value]="color.colorId" *ngFor="let color of colors">{{color.colorName}}</option>
+    </select> 
+    <h4>{{selectText}}</h4>
   </div>
+    <div class="col-md-2">
+      <button  routerLink="/cars/color/{{selectText}}" >Filtrele</button>
+    </div>
+</div>
+</div> -->
+
+<div >
+  <label for="filterText" class="form-label">Search Color </label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Search Color">
+</div>
+<div class="d-flex justify-content-center">
   <ul class="list-group my-2">
+    <li (click)="clearCurrentColor()" routerLink="/cars" [class]="getAllColorClass()">
+      All Colors
+    </li>
     <li
       (click)="setCurrentColor(color)"
-      *ngFor="let color of colors"
+      *ngFor="let color of colors | colorPipe:filterText"
       [class]="getCurrentColorClass(color)"
       routerLink="/cars/color/{{color.colorId}}"
     >
@@ -18,4 +33,3 @@
   </ul>
 </div>
 
-<h4 *ngIf="currentColor">{{currentColor.colorName}}</h4>
